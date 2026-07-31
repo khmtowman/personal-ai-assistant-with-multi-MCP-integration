@@ -49,7 +49,10 @@ The workflow performs the following steps:
 
 ### n8n Workflow
 
-![Workflow Overview](workflow.png)
+![Workflow Overview](1.%20personal%20assistant.png)
+![Workflow Overview](2.%20Calender%20MCP.png)
+![Workflow Overview](3.%20Task%20MCP.png)
+![Workflow Overview](4.%20Sheet%20MCP.png)
 
 ---
 
