@@ -62,10 +62,10 @@ The workflow performs the following steps:
 - Workflow 2 Google Calendar MCP.json
 - Workflow 3 Google Task MCP.json
 - Workflow 4 Google Sheets MCP.json
-- 1. personal assistant.png
-- 2. Calender MCP.png
-- 3. Task MCP.png
-- 4. Sheet MCP.png
+- 1.. personal assistant.png
+- 2.. Calender MCP.png
+- 3.. Task MCP.png
+- 4.. Sheet MCP.png
 - README.md
 
 ---
