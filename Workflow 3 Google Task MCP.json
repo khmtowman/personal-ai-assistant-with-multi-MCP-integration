@@ -1,0 +1,220 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "update",
+        "task": "MTcxMTIxMDI2MzczMDI4MjA0MTk6MDow",
+        "taskId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Task_ID', `The task id to be marked as completed. Get it from the get tasks tool`, 'string') }}",
+        "updateFields": {
+          "status": "completed"
+        }
+      },
+      "id": "3576de6b-b2e9-40e7-a7e2-0c463fe85293",
+      "name": "complete_task",
+      "type": "n8n-nodes-base.googleTasksTool",
+      "position": [
+        -48,
+        224
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "ffGN0Tal8gP1eL0H",
+          "name": "Google Tasks OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## MCP Server to Carry Out Actions",
+        "height": 480,
+        "width": 1540,
+        "color": 3
+      },
+      "id": "1b08afc2-379b-41d9-b4b5-291373666bd2",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -400,
+        -112
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "task": "MTcxMTIxMDI2MzczMDI4MjA0MTk6MDow",
+        "taskId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Task_ID', ``, 'string') }}",
+        "updateFields": {
+          "dueDate": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Due_Date', ``, 'string') }}",
+          "notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', ``, 'string') }}",
+          "title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', ``, 'string') }}"
+        }
+      },
+      "type": "n8n-nodes-base.googleTasksTool",
+      "typeVersion": 1,
+      "position": [
+        224,
+        224
+      ],
+      "id": "44a14e4d-5810-40f0-9d20-399125cdfbd8",
+      "name": "update tasks",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "ffGN0Tal8gP1eL0H",
+          "name": "Google Tasks OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "Create a task in Google Tasks",
+        "task": "MTcxMTIxMDI2MzczMDI4MjA0MTk6MDow",
+        "title": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Title', `Title summary of the task to be done`, 'string') }}",
+        "additionalFields": {
+          "completed": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Completion_Date', `Date the task was completed`, 'string') }}",
+          "dueDate": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Due_Date', `Date the task should be completed`, 'string') }}",
+          "notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', `Detailed description of the task`, 'string') }}",
+          "parent": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Parent', `If parent specified, create the task under that parent. Get the parent task id from the get tasks tool`, 'string') }}"
+        }
+      },
+      "id": "0ccc0b19-9042-43dc-86ce-73aa1fddff98",
+      "name": "create_task",
+      "type": "n8n-nodes-base.googleTasksTool",
+      "position": [
+        -352,
+        224
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "ffGN0Tal8gP1eL0H",
+          "name": "Google Tasks OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "task": "MTcxMTIxMDI2MzczMDI4MjA0MTk6MDow",
+        "returnAll": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Return_All', ``, 'boolean') }}",
+        "additionalFields": {
+          "showCompleted": true
+        }
+      },
+      "id": "2ae9fa9c-6724-477c-8dc2-b070589728ea",
+      "name": "get_tasks",
+      "type": "n8n-nodes-base.googleTasksTool",
+      "position": [
+        -192,
+        224
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "ffGN0Tal8gP1eL0H",
+          "name": "Google Tasks OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "task": "MTcxMTIxMDI2MzczMDI4MjA0MTk6MDow",
+        "taskId": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Task_ID', `Get the task ID from the get_tasks tool`, 'string') }}"
+      },
+      "type": "n8n-nodes-base.googleTasksTool",
+      "typeVersion": 1,
+      "position": [
+        480,
+        208
+      ],
+      "id": "99d5bb40-89fc-4b6f-a267-95bacd42d166",
+      "name": "delete task",
+      "credentials": {
+        "googleTasksOAuth2Api": {
+          "id": "ffGN0Tal8gP1eL0H",
+          "name": "Google Tasks OAuth2 API"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "path": "4c92a303-c386-4c36-90e7-6581d71aa000"
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpTrigger",
+      "typeVersion": 2,
+      "position": [
+        32,
+        -48
+      ],
+      "id": "b23a2c91-1795-48f2-9c30-ad69d453e9f2",
+      "name": "MCP Server Trigger",
+      "webhookId": "4c92a303-c386-4c36-90e7-6581d71aa000"
+    }
+  ],
+  "connections": {
+    "complete_task": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "update tasks": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "create_task": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "get_tasks": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "delete task": {
+      "ai_tool": [
+        [
+          {
+            "node": "MCP Server Trigger",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0c333bc9d06793ec3df198942616b73f730ec38c2c341d823fc5417f7a9ad406"
+  }
+}
+

@@ -1,0 +1,233 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-5-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        -304,
+        496
+      ],
+      "id": "9e7b4088-d65b-4bc4-983a-f3d66ebefd24",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "3Zlm3HN7jDssBg0R",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}\n\n  - Today's date and time: {{ $now.setZone('Asia/Dhaka') }}",
+        "options": {
+          "systemMessage": "=You are a helpful personal assistant named Towman. You have access to a Google Calendar MCP server, a Google Tasks MCP server, a Google Sheets MCP server, and a Context7 documentation MCP server.\n\n━━━━━━━━━━━━━━━━━━━━━━━━\n🧠 CURRENT CONTEXT\n━━━━━━━━━━━━━━━━━━━━━━━━\n- Today's date and time: {{ $now.setZone('Asia/Dhaka') }}\n- Timezone: Asia/Dhaka (Bangladesh Standard Time)\n\n━━━━━━━━━━━━━━━━━━━━━━━━\n🛠 YOUR MCP TOOLS & HOW TO USE THEM\n━━━━━━━━━━━━━━━━━━━━━━━━\n\n**Google Calendar MCP** — Use to create, get, delete, and list calendar events.\nWhen creating any calendar event, always confirm the time and attendees before calling the tool.\n\n**Google Tasks MCP** — Use to create, read, update, complete, and delete tasks.\n\n**Google Sheets MCP** — Use to log data and retrieve records from Google Sheets.\n- Sheet ID for logging: [1k1mpTbpwsz-0M6Tfau0YwLt4oJ3rjvF0s8KsXL8cAfM]\n- Tab \"Event Log\" columns: Date | Event Title | Attendees | Duration | Status\n- Tab \"Task Log\" columns: Created Date | Task Title | Due Date | Related Event\n- Use append_sheet_row to log. Use read_sheet_rows to retrieve summaries.\n\n**Context7 MCP** — Use to fetch up-to-date documentation for any software package (e.g. LangChain, Node.js, OpenAI SDK, n8n, React, etc.).\n- When a user asks about a library or package, call Context7 first to get current docs.\n- When a calendar event title contains a tech-related keyword, proactively fetch relevant docs and include a brief summary in your reply.\n\n━━━━━━━━━━━━━━━━━━━━━━━━\n🔗 INTEGRATION RULES (Calendar → Everything)\n━━━━━━━━━━━━━━━━━━━━━━━━\nWhenever you successfully create a Google Calendar event, you MUST automatically do all of the following in sequence:\n\n1. Append a row to the \"Event Log\" tab in Google Sheets using append_sheet_row:\n   - Date: the event start date/time\n   - Event Title: the event summary\n   - Attendees: comma-separated attendee emails\n   - Duration: duration in minutes\n   - Status: \"Scheduled\"\n\n2. Create a Google Task titled \"Prep for: [Event Title]\" using create_task:\n   - Due date: 1 day before the event\n   - Notes: \"Auto-created preparation task for your calendar event.\"\n\n3. If the event title contains any technical keyword (library, framework, package, or tool name), call Context7 to fetch documentation for it, then include a 2–3 sentence doc summary in your reply.\n\nAlways confirm all completed actions at the end of your reply in a clear list.\n\n━━━━━━━━━━━━━━━━━━━━━━━━\n📋 RESPONSE STYLE\n━━━━━━━━━━━━━━━━━━━━━━━━\n- Be concise and action-oriented\n- Always list what you did at the end using bullet points\n- For Chat interface, you may use basic HTML formatting"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        -64,
+        272
+      ],
+      "id": "1c6ea64f-d2a6-49e9-9577-cf9ec3b289c6",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -144,
+        528
+      ],
+      "id": "139089bc-073f-45c9-a5dc-e734cb6180c0",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "content": "## Personal Assistant\n1. Run all three workflows separately \n2. Add the MCP server SSE endpoints in the MCP client \n3. Setup telegram credentials\n",
+        "height": 592,
+        "width": 1376,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -464,
+        144
+      ],
+      "typeVersion": 1,
+      "id": "266a89dd-b062-4b72-91ae-b6b12f9067fd",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "public": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -400,
+        288
+      ],
+      "id": "fc9a756a-674c-40c1-ba4d-ceff1ee7a147",
+      "name": "When chat message received",
+      "webhookId": "a0611b4f-7abb-41d2-ac4c-c7dee6326774"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://kmtrarnob77.app.n8n.cloud/mcp/bc9b00fd-1c20-4097-b778-4c2600bcbc1c",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        272,
+        496
+      ],
+      "id": "f7c17e45-1cfb-4422-be78-ea0231e388e7",
+      "name": "Google calander MCP"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://kmtrarnob77.app.n8n.cloud/mcp/hellsing-ultimate",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        464,
+        480
+      ],
+      "id": "4bd959ad-fe12-4d89-912a-bd80f3e1979e",
+      "name": "Google Sheet MCP"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://mcp.context7.com/mcp",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        80,
+        528
+      ],
+      "id": "5b98e54a-c130-4248-b331-9f07926f6530",
+      "name": "Context7 MCP"
+    },
+    {
+      "parameters": {
+        "endpointUrl": "https://kmtrarnob77.app.n8n.cloud/mcp/4c92a303-c386-4c36-90e7-6581d71aa000",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.mcpClientTool",
+      "typeVersion": 1.2,
+      "position": [
+        640,
+        352
+      ],
+      "id": "006f1f67-492b-4a7e-80f7-83ac47fe4b69",
+      "name": "Google tasks MCP"
+    }
+  ],
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google calander MCP": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Sheet MCP": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Context7 MCP": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google tasks MCP": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "0c333bc9d06793ec3df198942616b73f730ec38c2c341d823fc5417f7a9ad406"
+  }
+}
+
